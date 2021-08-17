@@ -221,7 +221,6 @@ class _AddBirthdayState extends State<AddBirthday> {
             color: Colors.black,
           )),
       elevation: 0,
-      // backgroundColor: Colors.grey,
       centerTitle: true,
       title: Text(
         'Remind Me',

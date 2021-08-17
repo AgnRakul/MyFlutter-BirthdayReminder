@@ -58,13 +58,6 @@ class _BirthdayState extends State<Birthday> {
                             ),
                           ],
                         ),
-                        // Divider(
-                        //   color: Colors.green,
-                        //   height: MediaQuery.of(context).size.height * 0.001,
-                        //   thickness: MediaQuery.of(context).size.height * 0.004,
-                        //   indent: MediaQuery.of(context).size.width * 0.46,
-                        //   endIndent: MediaQuery.of(context).size.width * 0.3,
-                        // ),
                       ],
                     ),
                     SizedBox(
@@ -183,9 +176,6 @@ class _BirthdayState extends State<Birthday> {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.07,
                     width: MediaQuery.of(context).size.width * 0.84,
-                    //width: 50,
-                    // margin: EdgeInsets.all(10),
-                    // color: Colors.white,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(20),
                         color: Colors.blueGrey[400]),
@@ -232,17 +222,3 @@ class _BirthdayState extends State<Birthday> {
         });
   }
 }
-
-
-
-
-
-// floatingActionButton: Padding(
-      //   padding: const EdgeInsets.only(right: 150),
-      //   child: FloatingActionButton(
-      //       child: Icon(
-      //         Icons.add,
-      //         size: 40,
-      //       ),
-      //       onPressed: () {}),
-      // ),
