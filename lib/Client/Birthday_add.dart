@@ -1,14 +1,23 @@
+import 'package:birthday/Client/Birthday.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class AddBirthday extends StatefulWidget {
-  AddBirthday({Key? key}) : super(key: key);
+import 'BirthdayList.dart';
 
+class AddBirthday extends StatefulWidget {
   @override
   _AddBirthdayState createState() => _AddBirthdayState();
 }
 
+List<Birthdaylist> currentlist = [];
+var titleclr;
+var eventclr;
+var dateclr;
+var datef;
+var timeclr;
+
 class _AddBirthdayState extends State<AddBirthday> {
+  var titleclr;
   TimeOfDay _currentTime = TimeOfDay.now();
   Future<void> _selectTime(BuildContext context) async {
     final TimeOfDay? pickTime = await showTimePicker(
@@ -18,6 +27,7 @@ class _AddBirthdayState extends State<AddBirthday> {
     if (pickTime != null) {
       setState(() {
         _currentTime = pickTime;
+        dateclr = _currentdate.year;
       });
     }
   }
@@ -33,6 +43,8 @@ class _AddBirthdayState extends State<AddBirthday> {
     if (pickdate != null && pickdate != _currentdate) {
       setState(() {
         _currentdate = pickdate;
+        datef =
+            '${_currentdate.day}-${_currentdate.month}-${_currentdate.year}';
         print(_currentdate.toString());
       });
     }
@@ -47,7 +59,6 @@ class _AddBirthdayState extends State<AddBirthday> {
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
             margin: EdgeInsets.all(5),
-            // color: Colors.blueGrey,
             child: Column(
               children: [
                 SizedBox(
@@ -78,8 +89,14 @@ class _AddBirthdayState extends State<AddBirthday> {
                   Padding(
                     padding: EdgeInsets.only(left: 30, right: 30),
                     child: TextField(
+                      onChanged: (val) {
+                        setState(() {
+                          titleclr = val;
+                          print(titleclr);
+                        });
+                      },
                       decoration: InputDecoration(
-                        hintText: 'Event title',
+                        hintText: 'Name of Birthday Boy/Girl',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.all(
                             Radius.circular(10),
@@ -94,6 +111,7 @@ class _AddBirthdayState extends State<AddBirthday> {
                   Padding(
                     padding: const EdgeInsets.only(left: 30, right: 30),
                     child: TextField(
+                      onTap: () {},
                       decoration: InputDecoration(
                         hintText: 'Write about the event',
                         border: OutlineInputBorder(
@@ -111,7 +129,7 @@ class _AddBirthdayState extends State<AddBirthday> {
                     padding: EdgeInsets.only(left: 30, right: 30),
                     child: TextField(
                       onTap: () {
-                        _selectdate(context);
+                        dateclr = _selectdate(context);
                       },
                       readOnly: true,
                       decoration: InputDecoration(
@@ -133,7 +151,7 @@ class _AddBirthdayState extends State<AddBirthday> {
                     padding: EdgeInsets.only(left: 30, right: 30),
                     child: TextField(
                       onTap: () {
-                        _selectTime(context);
+                        timeclr = _selectTime(context);
                       },
                       readOnly: true,
                       decoration: InputDecoration(
@@ -184,6 +202,18 @@ class _AddBirthdayState extends State<AddBirthday> {
                           borderRadius: BorderRadius.circular(20)),
                       child: TextButton(
                         onPressed: () {
+                          currentlist.add(Birthdaylist(
+                              title: titleclr,
+                              date: dateclr,
+                              time: timeclr,
+                              datef: datef,
+                              event: eventclr));
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) {
+                            return Birthday(
+                              nclist: currentlist,
+                            );
+                          }));
                           showDialog(
                               context: context,
                               builder: (BuildContext context) =>

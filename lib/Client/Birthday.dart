@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'Birthday_add.dart';
 
+// ignore: must_be_immutable
 class Birthday extends StatefulWidget {
-  Birthday({Key? key}) : super(key: key);
+  List<dynamic>? nclist = [];
+  Birthday({this.nclist});
 
   @override
   _BirthdayState createState() => _BirthdayState();
@@ -11,23 +13,7 @@ class Birthday extends StatefulWidget {
 
 class _BirthdayState extends State<Birthday> {
   int currentIndex = 0;
-  List birthdaylist = [
-    '01 Jan 2020',
-    '01 Jan 2020',
-    '01 Jan 2020',
-    '01 Jan 2020',
-    '01 Jan 2020',
-    '01 Jan 2020'
-  ];
-  List birthdaytitle = [
-    'Rakul Birthday',
-    'John Birthday',
-    'John Birthday',
-    'John Birthday',
-    'John Birthday',
-    'John Birthday'
-  ];
-
+  final currentyearAge = DateTime.now();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +22,7 @@ class _BirthdayState extends State<Birthday> {
           child: Column(
             children: [
               Container(
+                // color: Colors.blue,
                 margin: EdgeInsets.all(10),
                 child: Column(
                   children: [
@@ -106,15 +93,15 @@ class _BirthdayState extends State<Birthday> {
                           ))
                     ]),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.02,
+                      height: MediaQuery.of(context).size.height * 0.03,
                     ),
                   ],
                 ),
               ),
               Expanded(
-                flex: 0,
                 child: Container(
-                  height: MediaQuery.of(context).size.height / 1.8,
+                  // color: Colors.yellow,
+                  height: MediaQuery.of(context).size.height / 1.9,
                   child: _customlistviewbuilder(),
                 ),
               )
@@ -122,26 +109,33 @@ class _BirthdayState extends State<Birthday> {
           ),
         ),
       ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        shape: CircularNotchedRectangle(),
+        child: Container(
+          // color: Colors.green,
+          height: MediaQuery.of(context).size.height * 0.08,
+          child: Row(
+            mainAxisSize: MainAxisSize.max,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          ),
+        ),
+      ),
       floatingActionButton: Container(
-        width: MediaQuery.of(context).size.width / 1.1,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.end,
-          //crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              //crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                FloatingActionButton(
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => AddBirthday()));
-                  },
-                  child: Icon(Icons.add),
-                ),
-              ],
+        // color: Colors.green,
+        height: 65.0,
+        width: 70.0,
+        child: FittedBox(
+          child: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AddBirthday()));
+            },
+            child: Icon(
+              Icons.add,
+              color: Colors.white,
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -149,19 +143,20 @@ class _BirthdayState extends State<Birthday> {
 
   _customlistviewbuilder() {
     return ListView.builder(
-        itemCount: birthdaylist.length,
+        itemCount: currentlist.length,
         itemBuilder: (BuildContext context, index) {
           return Column(
             children: [
               Row(children: [
                 SizedBox(
                   width: MediaQuery.of(context).size.width * 0.08,
+                  height: MediaQuery.of(context).size.height * 0.04,
                 ),
                 Text(
-                  birthdaytitle[index],
+                  "${currentlist[index].title} Birthday ",
                   style: GoogleFonts.poppins(
                       textStyle: TextStyle(
-                    fontSize: 15,
+                    fontSize: 17,
                   )),
                 )
               ]),
@@ -188,7 +183,7 @@ class _BirthdayState extends State<Birthday> {
                               color: Colors.white,
                             )),
                         Text(
-                          birthdaylist[index],
+                          currentlist[index].datef,
                           style: GoogleFonts.poppins(
                             textStyle: TextStyle(
                               color: Colors.white,
@@ -201,12 +196,12 @@ class _BirthdayState extends State<Birthday> {
                           width: MediaQuery.of(context).size.width * 0.25,
                         ),
                         Text(
-                          'Age 21',
+                          'Age ${currentyearAge.year - currentlist[index].date}',
                           style: GoogleFonts.poppins(
                               textStyle: TextStyle(
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
-                            fontSize: 12,
+                            fontSize: 13,
                           )),
                         ),
                       ],
