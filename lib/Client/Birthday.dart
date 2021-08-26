@@ -37,11 +37,12 @@ class _BirthdayState extends State<Birthday> {
                             Text(
                               'Remind Me',
                               style: GoogleFonts.poppins(
-                                  textStyle: TextStyle(
-                                color: Colors.black,
-                                fontSize: 17,
-                                fontWeight: FontWeight.bold,
-                              )),
+                                textStyle: TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ),
                           ],
                         ),

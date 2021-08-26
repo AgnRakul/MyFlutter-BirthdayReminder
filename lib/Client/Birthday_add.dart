@@ -198,7 +198,7 @@ class _AddBirthdayState extends State<AddBirthday> {
                       width: 110,
                       height: 35,
                       decoration: BoxDecoration(
-                          color: Colors.teal[300],
+                          color: Colors.teal[500],
                           borderRadius: BorderRadius.circular(20)),
                       child: TextButton(
                         onPressed: () {
